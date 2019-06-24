@@ -1,1 +1,0 @@
-select city_trip_cnt.city, round(city_trip_cnt.cnt * 1.0 / trip_cnt.cnt, 4) as ratio from (select city, count(distinct(id)) as cnt from trip, station where station_id = start_station_id or station_id = end_station_id group by city) as city_trip_cnt, (select count(*) as cnt from trip) as trip_cnt order by ratio desc, city asc;
