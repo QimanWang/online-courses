@@ -1,0 +1,2 @@
+with storm_count(zip_code, station_id, station_name, cnt) as (select station.zip_code, station_id, station_name, count(*) from weather, station, trip where date(start_time) = date and events = 'Rain-Thunderstorm' and start_station_id = station_id and station.zip_code = weather.zip_code group by station.zip_code, station_id) select zip_code, station_name, cnt from storm_count where cnt = (select max(max_count.cnt) from storm_count as max_count where max_count.zip_code = storm_count.zip_code) order by zip_code asc;
+
